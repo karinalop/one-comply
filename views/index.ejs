@@ -11,11 +11,11 @@
 <body style="font-size:20px; padding:50px;">
 
     <!-- Add EJS code here -->
-      <%= dependent.section_heading %>
-     <% for(let key in dependent){%>
+      <%= section_heading %>
+     <% for(let key in section){%>
      <br>
       <%= key %>
-      <%= dependent[key] %>
+      <%= section[key] %>
 
     <% }; %>
 </body>

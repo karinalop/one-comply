@@ -28,16 +28,15 @@ const axios = require('axios');
 //helper function
 
 const match_info = function (data, fields){
-  let dependent = {section_heading: fields[0].section_heading};
-  console.log(fields[0].section_heading);
+  let section = {};
   for(let i in data){
     for(let j in fields){
       if (fields[j].id === data[i].field){
-        dependent[fields[j].label] = data[i].value;
+        section[fields[j].label] = data[i].value;
       }
     }
   }
-  return dependent;
+  return section;
 }
 
 
@@ -87,9 +86,8 @@ app.get("/dependent", (req, res) => {
   .then(response => {
       axios.get('https://www.formstack.com/api/v2/form/3634968.json?oauth_token=720106c7a6217516f9ed110fd31a5fca')
       .then(res_form => {
-        // let template_vars = { sub_info: response.data.data, form_info: res_form.data.fields }
         // res.send(template_vars);
-        let template_vars = { dependent: match_info(response.data.data, res_form.data.fields)};
+        let template_vars = { section_heading: res_form.data.fields[0].section_heading , section: match_info(response.data.data, res_form.data.fields)};
         res.render("index", template_vars);
       })
       .catch(error => {
