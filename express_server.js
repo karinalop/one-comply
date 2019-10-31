@@ -2,21 +2,83 @@ const express = require("express");
 const app = express();
 const PORT = 8080; // default port 8080
 
-const urlDatabase = {
-  "b2xVn2": "http://www.lighthouselabs.ca",
-  "9sm5xK": "http://www.google.com"
-};
+//custom
+const axios = require('axios');
 
-app.get("/", (req, res) => {
-  res.send("Hello!");
+// const urlDatabase = {
+//   "b2xVn2": "http://www.lighthouselabs.ca",
+//   "9sm5xK": "http://www.google.com"
+// };
+
+// app.get("/", (req, res) => {
+//   res.send("Hello!");
+// });
+
+// app.get("/urls.json", (req, res) => {
+//   res.json(urlDatabase);
+// });
+
+// app.get("/hello", (req, res) => {
+//   res.send("<html><body>Hello <b>World kari</b></body></html>\n");
+// });
+
+
+//--- route to check the submision data-----------------------
+
+app.get("/sub_data", (req, res) => {
+  axios.get('https://www.formstack.com/api/v2/submission/551042206.json?oauth_token=720106c7a6217516f9ed110fd31a5fca')
+  .then(response => {
+    console.log(response.data);
+    res.send(response.data);
+  })
+  .catch(error => {
+    console.log(error);
+  }); //end axios request
 });
 
-app.get("/urls.json", (req, res) => {
-  res.json(urlDatabase);
+//----route to check the form data--------------------
+
+app.get("/form_data", (req, res) => {
+  axios.get('https://www.formstack.com/api/v2/form/3634968.json?oauth_token=720106c7a6217516f9ed110fd31a5fca')
+  .then(response => {
+    console.log(response.data);
+    res.send(response.data);
+  })
+  .catch(error => {
+    console.log(error);
+  }); //end axios request
 });
 
-app.get("/hello", (req, res) => {
-  res.send("<html><body>Hello <b>World kari</b></body></html>\n");
+//route to test the form html view-----------------------
+
+app.get("/form_data_html", (req, res) => {
+  axios.get('https://www.formstack.com/api/v2/form/3634968.json?oauth_token=720106c7a6217516f9ed110fd31a5fca')
+  .then(response => {
+    console.log(response.data);
+    res.send(response.data.html);
+  })
+  .catch(error => {
+    console.log(error);
+  }); //end axios request
+});
+
+
+//---------- real thing ------------
+app.get("/dependent", (req, res) => {
+  axios.get('https://www.formstack.com/api/v2/submission/551042206.json?oauth_token=720106c7a6217516f9ed110fd31a5fca')
+  .then(response => {
+      axios.get('https://www.formstack.com/api/v2/form/3634968.json?oauth_token=720106c7a6217516f9ed110fd31a5fca')
+      .then(res_form => {
+        let template_vars = { sub_info: response.data, form_info: res_form.data }
+        res.send(template_vars);
+      })
+      .catch(error => {
+        console.log(error);
+      }); //end axios form request
+  })
+  .catch(error => {
+    console.log(error);
+  }); //end axios submision information request
 });
 
 app.listen(PORT, () => {
