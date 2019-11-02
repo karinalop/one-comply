@@ -81,7 +81,7 @@ app.get("/form_data_html", (req, res) => {
 
 
 //---------- real thing ------------
-app.get("/dependent", (req, res) => {
+app.get("/", (req, res) => {
   axios.get('https://www.formstack.com/api/v2/submission/551042206.json?oauth_token=720106c7a6217516f9ed110fd31a5fca')
   .then(response => {
       axios.get('https://www.formstack.com/api/v2/form/3634968.json?oauth_token=720106c7a6217516f9ed110fd31a5fca')
