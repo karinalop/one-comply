@@ -25,7 +25,7 @@ const axios = require('axios');
 //   res.send("<html><body>Hello <b>World kari</b></body></html>\n");
 // });
 
-//helper function
+//helper functions
 
 const match_info = function (data, fields){
   let section = {};
@@ -37,6 +37,19 @@ const match_info = function (data, fields){
     }
   }
   return section;
+}
+
+//------------------------------------
+
+const split_string = function(str){
+  const arr = str.split(" ");
+  let result = " ";
+  arr.forEach((elem, index) =>{
+    if(elem == "="){
+      result += arr[index +1] + " ";
+    }
+  });
+  return result;
 }
 
 
