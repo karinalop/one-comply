@@ -9,7 +9,7 @@ A single-page full stack web application built with Node, Express, EJS, HTML an 
 
 
 ## Final Product
-!["Screenshot of the index page"]()
+!["Screenshot of the index page"](https://github.com/karinalop/one-comply/blob/master/docs/index.png)
 
 
 
