@@ -32,8 +32,8 @@ const match_info = function (data, fields){
   for(let i in data){
     for(let j in fields){
       if (fields[j].id === data[i].field){
-        if(data[i].field === "84016123" || data[i].field === "84016126" ) {//address or name
-          section[fields[j].label] = readable_string(data[i].value);//data[i].value;//
+        if(data[i].field === "84016123" || data[i].field === "84016126" ) {//fields address or name
+          section[fields[j].label] = readable_string(data[i].value)
         } else{
           section[fields[j].label] = data[i].value;
         }
@@ -47,7 +47,6 @@ const match_info = function (data, fields){
 
 const readable_string = function(str){
   const arr = str.split("\n").join(" ").split(" ");
-  console.log(arr);
   let result = "";
   arr.forEach((elem, index) =>{
     if(elem !== "=" && arr[index + 1] !== "="){
