@@ -9,26 +9,8 @@ if (port == null || port == "") {
 
 app.set("view engine", "ejs");
 
-//custom
 const axios = require('axios');
 
-
-// const urlDatabase = {
-//   "b2xVn2": "http://www.lighthouselabs.ca",
-//   "9sm5xK": "http://www.google.com"
-// };
-
-// app.get("/", (req, res) => {
-//   res.send("Hello!");
-// });
-
-// app.get("/urls.json", (req, res) => {
-//   res.json(urlDatabase);
-// });
-
-// app.get("/hello", (req, res) => {
-//   res.send("<html><body>Hello <b>World kari</b></body></html>\n");
-// });
 
 //helper functions
 
@@ -102,7 +84,7 @@ app.get("/form_data_html", (req, res) => {
 });
 
 
-//---------- real thing ------------
+//---------- index ------------
 app.get("/", (req, res) => {
   axios.get('https://www.formstack.com/api/v2/submission/551042206.json?oauth_token=720106c7a6217516f9ed110fd31a5fca')
   .then(response => {
