@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const PORT = 8080; // default port 8080
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8080;
+}
+
 app.set("view engine", "ejs");
 
 //custom
@@ -118,8 +123,8 @@ app.get("/", (req, res) => {
 
 
 //------------------------------------------------
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}!`);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`);
 });
 
 
